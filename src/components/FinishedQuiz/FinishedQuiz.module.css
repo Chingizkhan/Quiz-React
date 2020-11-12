@@ -24,3 +24,7 @@
 .error {
   color: rgba(240, 87, 108, .7);
 }
+
+.FinishedQuiz button {
+  cursor: pointer;
+}
