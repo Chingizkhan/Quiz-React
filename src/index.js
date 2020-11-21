@@ -4,12 +4,30 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom'
+import { createStore, applyMiddleware, compose } from 'redux'
+import { Provider } from 'react-redux'
+import rootReducer from './redux/reducers/rootReducer';
+import thunk from 'redux-thunk'
+
+const composeEnhancers =
+  typeof window === 'object' &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+    }) : compose;
+
+const enhancer = composeEnhancers(
+  applyMiddleware(thunk),
+);
+
+const store = createStore(rootReducer, enhancer)
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
